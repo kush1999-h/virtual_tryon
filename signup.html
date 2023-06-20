@@ -89,12 +89,54 @@
 
 <footer class="footer">
   <div class="container">
-    <center>Developed by <a href=""></a></center>
+    <center>Developed by <a href="https://vton.com/">vton</a></center>
   </div>
 </footer>
 
 <script type="module">
   // Firebase initialization code and event listeners go here
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBlGR8j8dadS9DyOlWd005Y_860j9CpIBE",
+    authDomain: "e-commerce-4c0df.firebaseapp.com",
+    projectId: "e-commerce-4c0df",
+    storageBucket: "e-commerce-4c0df.appspot.com",
+    messagingSenderId: "979113894068",
+    appId: "1:979113894068:web:0b3dc944a37dc5f1c6f7e1",
+    measurementId: "G-H98PF4R219"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    console.log(app);
+
+    //----- New Registration code start
+    document.getElementById("register").addEventListener("click", function() {
+      var email =  document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      //For new registration
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        alert("Registration successfully!!");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorMessage);
+        alert(error);
+      });
+    });
+    //----- End
 </script>
 
 </body>
